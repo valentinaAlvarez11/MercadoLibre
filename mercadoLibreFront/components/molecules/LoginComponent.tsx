@@ -71,7 +71,7 @@ export default function LoginComponent() {
             label="Introduce la contraseña"
             typeElement="password"
             idElement="password"
-            nameRegister="contraseña"
+            nameRegister="password"
             register={register}
           />
         </div>

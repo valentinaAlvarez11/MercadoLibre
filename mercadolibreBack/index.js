@@ -27,7 +27,7 @@ db.run(`CREATE TABLE IF NOT EXISTS usuarios (
 
 // Middleware para CORS
 app.use(cors({
-  origin: "http://localhost:3001",
+  origin: ["http://localhost:3000", "http://localhost:3001"],
   credentials: true
 }));
 
