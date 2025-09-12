@@ -1,4 +1,4 @@
-import ImageCarousel from "@/components/organisms/AmazonCarrouselImages"
+import ImageCarousel from "../../components/organisms/BestBuyCarrouselImages"
 
 export default function page() {
   return (
