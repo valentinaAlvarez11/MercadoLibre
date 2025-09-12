@@ -1,5 +1,8 @@
 const express = require("express");
+// Clave secreta para JWT (en producción usa variable de entorno)
+const SECRET_KEY = "mercadolibre_super_secreto_2025";
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const sqlite3 = require("sqlite3").verbose();
 const app = express();
@@ -18,8 +21,15 @@ db.run(`CREATE TABLE IF NOT EXISTS usuarios (
   email TEXT UNIQUE,
   telefono TEXT,
   nombre TEXT,
-  contraseña TEXT
+  password TEXT
 )`);
+
+
+// Middleware para CORS
+app.use(cors({
+  origin: "http://localhost:3001",
+  credentials: true
+}));
 
 // Middleware para procesar JSON y cookies
 app.use(express.json());
@@ -27,8 +37,10 @@ app.use(cookieParser());
 
 
 app.post("/register", (req, res) => {
-  const { email, telefono, nombre, contraseña } = req.body;
-  if (!email || !telefono || !nombre || !contraseña) {
+  const { email, telefono, nombre } = req.body;
+  // Permitir tanto 'password' como 'contraseña' en el body
+  const password = req.body.password || req.body.contraseña;
+  if (!email || !telefono || !nombre || !password) {
     return res.status(400).json({ error: "Por favor completa todos los campos" });
   }
   db.get("SELECT * FROM usuarios WHERE email = ?", [email], (err, row) => {
@@ -39,8 +51,8 @@ app.post("/register", (req, res) => {
       return res.status(409).json({ error: "Ya existe una cuenta registrada con este correo." });
     }
     db.run(
-      "INSERT INTO usuarios (email, telefono, nombre, contraseña) VALUES (?, ?, ?, ?)",
-      [email, telefono, nombre, contraseña],
+      "INSERT INTO usuarios (email, telefono, nombre, password) VALUES (?, ?, ?, ?)",
+      [email, telefono, nombre, password],
       function (err) {
         if (err) {
           return res.status(500).json({ error: "No se pudo registrar el usuario. Intenta nuevamente." });
@@ -55,14 +67,14 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const { email, contraseña } = req.body;
-  if (!email || !contraseña) {
-    return res.status(400).json({ error: "Email y contraseña son requeridos." });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email y password son requeridos." });
   }
   // Buscar usuario en la base de datos
   db.get(
-    "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?",
-    [email, contraseña],
+    "SELECT * FROM usuarios WHERE email = ? AND password = ?",
+    [email, password],
     (err, row) => {
       if (err) {
         return res.status(500).json({ error: "Error en la base de datos." });

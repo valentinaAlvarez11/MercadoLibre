@@ -12,10 +12,10 @@ interface InputComponentsProps {
   idElement: string
   nameRegister: string
   listValues?: valuesSelect[]
+  register: any
 }
 
-export default function InputComponents({ label, typeElement, idElement, listValues, nameRegister }: InputComponentsProps) {
-  const { register } = useForm()
+export default function InputComponents({ label, typeElement, idElement, listValues, nameRegister, register }: InputComponentsProps) {
   return (
     <>
       <label htmlFor={ idElement } className="font-semibold">
