@@ -12,7 +12,11 @@ export default function HeaderComponent() {
         {/* Logo y ubicación */}
         <div className="flex flex-col items-start min-w-[200px]">
           <div className="flex items-center gap-2">
-            <Image src={mercadolibreLogo} alt="mercado libre" width={120} height={40} />
+            <img
+            src="https://logodownload.org/wp-content/uploads/2018/10/mercado-libre-logo-1.png" 
+            alt="mercado libre" 
+            width={120} 
+            height={40} />
           </div>
           <div className="flex items-center mt-1">
             <MdLocationOn className="text-2xl text-black mr-1" />
