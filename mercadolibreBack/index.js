@@ -148,6 +148,25 @@ app.get("/product", (req, res) => {
     res.json({ productos });
   });
 });
+
+// Endpoint para obtener un producto por id
+app.get("/product/:id", (req, res) => {
+  const { id } = req.params;
+  dbProductos.get("SELECT * FROM productos WHERE id = ?", [id], (err, row) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al consultar el producto." });
+    }
+    if (!row) {
+      return res.status(404).json({ error: "Producto no encontrado." });
+    }
+    // Convertir description de JSON a array
+    const producto = {
+      ...row,
+      description: JSON.parse(row.description)
+    };
+    res.json({ producto });
+  });
+});
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
