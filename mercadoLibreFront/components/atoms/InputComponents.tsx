@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
-import { standardInput } from "../../utils/Tokens"
+
+import { standardInput } from "@/utils/Tokens"
 
 interface valuesSelect {
   value: string
@@ -9,10 +10,11 @@ interface InputComponentsProps {
   label: string
   typeElement: "text" | "password"
   idElement: string
+  nameRegister: string
   listValues?: valuesSelect[]
 }
 
-export default function InputComponents({ label, typeElement, idElement, listValues }: InputComponentsProps) {
+export default function InputComponents({ label, typeElement, idElement, listValues, nameRegister }: InputComponentsProps) {
   const { register } = useForm()
   return (
     <>
@@ -30,7 +32,7 @@ export default function InputComponents({ label, typeElement, idElement, listVal
           </select>
         ) : (
           <input
-            {...register("user")}
+            {...register(nameRegister)}
             type={ typeElement === "text" ? "text" : "password" }
             id={ idElement }
             className={standardInput}

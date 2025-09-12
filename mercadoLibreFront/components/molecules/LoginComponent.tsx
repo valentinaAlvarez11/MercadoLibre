@@ -1,14 +1,18 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FaApple } from "react-icons/fa"
-import { FcGoogle } from "react-icons/fc"
-import Cookies from "js-cookie"
-import { LoginDTO } from "../../interfaces/login"
-import { loginScheme } from "../../schemas/login"
-import { loginService } from "../../libs/authService"
+
+import InputComponents from "../atoms/InputComponents"
+
+import { LoginDTO } from "@/interfaces/login"
+import { loginScheme } from "@/schemas/login"
+
+import { loginService } from "@/libs/authService"
+
+import { standardInput } from "@/utils/Tokens"
 
 export default function LoginComponent() {
+
   const { 
     register, 
     handleSubmit,
@@ -19,54 +23,44 @@ export default function LoginComponent() {
   
   const onSubmit: SubmitHandler<LoginDTO> = (data) => {
     loginService(data)
-      .then((info) => {
-        Cookies.set('jwt_token', info.access_token, { expires: 7, secure: true, sameSite: 'strict' })
-        console.log('Token almacenado en la cookie:', Cookies.get('jwt_token'))
-        alert('¡Login exitoso! Token guardado en la cookie.')
-      })
-      .catch(() => {
-        console.error('Error en solicitud');
-      })
+    .then((info) => {
+      localStorage.setItem('token', info.access_token)
+    })
+    .catch(e => {
+      console.error('Error en solicitud');
+    })
   }
 
   const onErrors = () => {
     console.log('Errores', errors);
-    alert('Información incompleta')
+    
+    alert('Informacion incompleta')
   };
-
-    return (
+  
+  return (
     <form onSubmit={handleSubmit(onSubmit, onErrors)} className="space-y-4">
-      {/* Email */}
       <div>
-        <input
-          {...register("user")}
-          type="text"
-          placeholder="Email Address"
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <InputComponents 
+          label="Introduce el usuario"
+          typeElement="text"
+          idElement="email"
+          nameRegister="user"
         />
-        {errors.user && (
-          <p className="text-red-500 text-sm mt-1">{errors.user.message}</p>
-        )}
       </div>
-
-      {/* Contraseña */}
       <div>
-        <input
-          {...register("password")}
-          type="password"
-          placeholder="Password"
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <InputComponents 
+          label="Introduce la contraseña"
+          typeElement="password"
+          idElement="password"
+          nameRegister="password"
         />
-        {errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-        )}
       </div>
 
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition"
+        className="w-full bg-yellow-400 hover:bg-yellow-300 text-black font-medium py-2 rounded-lg transition"
       >
-        Sign In
+        Continuar
       </button>
     </form>
   )

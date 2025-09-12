@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HeaderComponent from "../../components/organisms/HeaderComponent";
+import HeaderComponent from "@/components/organisms/HeaderComponent";
 
 export const metadata: Metadata = {
   title: "Create Next App",

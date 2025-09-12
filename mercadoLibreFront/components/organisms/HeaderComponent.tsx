@@ -1,75 +1,65 @@
-// components/molecules/HeaderComponent.tsx
+import Image from "next/image";
+import mercadolibreLogo from "@/app/assets/mercadolibre.png";
+import enviog from "@/app/assets/enviog.png";
 import { FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { MdLocationOn } from 'react-icons/md';
 
 export default function HeaderComponent() {
   return (
-    <header className="bg-[#FFF159] text-gray-800 text-sm">
-      {/* Sección Superior */}
-      <div className="flex items-center justify-between px-4 py-2 max-w-[1200px] mx-auto">
-        {/* Logo y Ubicación */}
-        <div className="flex items-center gap-6">
-          <a href="/" className="flex-shrink-0">
-            <img 
-              src="https://logodownload.org/wp-content/uploads/2018/10/mercado-libre-logo-1.png" 
-              alt="Mercado Libre Logo" 
-              className="h-9 w-auto" 
-            />
-          </a>
-          <div className="hidden lg:flex items-center text-xs leading-tight cursor-pointer hover:text-blue-600 transition duration-200">
-            <MdLocationOn className="text-2xl mr-1 text-gray-700" />
-            <div className="flex flex-col">
-              <span className="text-gray-600">
-                Ingresa
-              </span>
-              <span className="font-semibold text-gray-800">
-                tu ubicación
-              </span>
+    <header className="bg-[#ffe600] w-full">
+      {/* Primera fila: Logo, Buscador, Envío Gratis, Usuario */}
+      <div className="flex items-center justify-between max-w-[1400px] mx-auto px-4 pt-2 pb-1">
+        {/* Logo y ubicación */}
+        <div className="flex flex-col items-start min-w-[200px]">
+          <div className="flex items-center gap-2">
+            <Image src={mercadolibreLogo} alt="mercado libre" width={120} height={40} />
+          </div>
+          <div className="flex items-center mt-1">
+            <MdLocationOn className="text-2xl text-black mr-1" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-xs text-gray-700">Ingresa tu</span>
+              <span className="text-base text-black font-medium">ubicación</span>
             </div>
           </div>
         </div>
-
-        {/* Barra de Búsqueda */}
-        <div className="flex flex-1 max-w-[600px] mx-4">
-          <input
-            type="text"
-            placeholder="Buscar productos, marcas y más..."
-            className="flex-1 px-4 py-3 text-gray-800 outline-none rounded-l-md shadow-md focus:ring-2 focus:ring-blue-500 transition duration-200"
-          />
-          <button className="bg-gray-200 px-4 flex items-center justify-center rounded-r-md shadow-md hover:bg-gray-300 transition duration-200">
-            <FaSearch className="text-gray-600" />
-          </button>
+        {/* Buscador */}
+        <div className="w-full flex justify-center">
+          <div className="flex w-full max-w-[900px]">
+            <input
+              type="text"
+              placeholder="Buscar productos, marcas y más..."
+              className="flex-1 px-4 py-3 rounded-l-md text-lg text-gray-700 bg-white border-none outline-none shadow-sm"
+            />
+            <button className="bg-white px-4 flex items-center justify-center rounded-r-md border-l border-gray-200">
+              <FaSearch className="text-gray-400 text-xl" />
+            </button>
+          </div>
         </div>
+        {/* Envío Gratis y usuario */}
+        <div className="flex items-center gap-8 min-w-[400px] justify-end">
+          <a href="https://www.mercadolibre.com.co/l/descarga-la-app#DEAL_ID=MCO23116&S=MKT&V=1&T=BME&L=MKTG_UNKAUDFSNBAPPEXCLUSIVE&me.audience=unknown&me.bu=3&me.bu_line=26&me.component_id=banner_menu_web_ml&me.content_id=UNK_FREE_SHIPPING_NB&me.flow=-1&me.logic=user_journey&me.position=0" className="exhibitor__picture flex items-center" target="_blank" rel="noopener noreferrer" style={{boxShadow: 'none', border: 'none', padding: 0, background: 'none'}}>
+            <Image src={enviog} alt="ENVIO GRATIS PRIMERA COMPRA" width={680} height={78} style={{display: 'block', maxWidth: '100%', height: 'auto'}} />
+          </a>
+          <div className="flex items-center gap-6">
 
-        {/* Acciones de Usuario y Carrito */}
-        <div className="hidden md:flex items-center gap-4 text-xs font-semibold">
-          <a href="#" className="hover:text-blue-600 transition duration-200 hidden lg:block">
-            Crea tu cuenta
-          </a>
-          <a href="#" className="hover:text-blue-600 transition duration-200 hidden lg:block">
-            Ingresa
-          </a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">
-            Mis compras
-          </a>
-          <div className="relative cursor-pointer hover:text-blue-600 transition duration-200">
-            <FaShoppingCart className="text-2xl" />
+            <span className="text-black font-medium cursor-pointer">Ingresa</span>
+            <span className="text-black font-medium cursor-pointer">Mis compras</span>
+            <FaShoppingCart className="text-2xl text-black cursor-pointer" />
           </div>
         </div>
       </div>
-
-      {/* Sección Menú Inferior (Categorías) */}
-      <nav className="bg-gray-100 text-gray-700 text-sm border-t border-gray-200 shadow-sm hidden md:block">
-        <div className="max-w-[1200px] mx-auto flex items-center gap-5 px-4 py-2">
-          <a href="#" className="hover:text-blue-600 transition duration-200">Categorías</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Ofertas</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Historial</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Supermercado</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Moda</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Vender</a>
-          <a href="#" className="hover:text-blue-600 transition duration-200">Ayuda/PQR</a>
+      {/* Segunda fila: Menú */}
+      <div className="w-full flex justify-center bg-[#ffe600]" style={{minHeight: 36}}>
+        <div className="flex flex-row w-full max-w-[900px]">
+          <span className="text-base text-black font-medium mr-6 cursor-pointer flex items-center gap-1">Categorías <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1.5L6 6.5L11 1.5" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Ofertas</span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Cupones</span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Supermercado <span className="bg-blue-600 text-white text-[10px] px-2 py-[1px] rounded ml-1 align-middle">NUEVO</span></span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Moda</span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Vender</span>
+          <span className="text-base text-black font-medium mr-4 cursor-pointer">Ayuda / PQR</span>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

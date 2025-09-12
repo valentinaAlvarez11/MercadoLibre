@@ -1,50 +1,64 @@
-import { FcGoogle } from 'react-icons/fc';
-import LoginComponent from '../../../components/molecules/LoginComponent';
-import { FaApple } from "react-icons/fa";
+import LoginComponent from '@/components/molecules/LoginComponent';
 
-const BestBuyLogin = () => {
+const AmazonLogin = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-sm">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-sm">
+      {/* Logo */}
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+        alt="Amazon logo"
+        className="h-8 mb-4"
+      />
 
-      <div className="w-[380px] bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-xl font-semibold text-center mb-6">
-          Sign In to Best Buy
-        </h1>
+      {/* Card */}
+      <div className="w-[350px] border border-gray-300 rounded-md p-6 shadow-sm">
+        <h1 className="text-xl font-semibold mb-4">Inicia sesión o crea una cuenta</h1>
 
         <LoginComponent />
 
-        <div className="flex items-center my-4">
-          <div className="flex-grow h-px bg-gray-300"></div>
-          <span className="px-2 text-sm text-gray-500">or</span>
-          <div className="flex-grow h-px bg-gray-300"></div>
+        <p className="text-xs text-gray-700 mt-4">
+          Al continuar, aceptas las{' '}
+          <a href="#" className="text-blue-600 hover:underline">
+            Condiciones de uso
+          </a>{' '}
+          y el{' '}
+          <a href="#" className="text-blue-600 hover:underline">
+            Aviso de privacidad
+          </a>{' '}
+          de Amazon.
+        </p>
+
+        <div className="mt-4">
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            ¿Necesitas ayuda?
+          </a>
         </div>
 
-                {/* Botones externos */}
-        <button className="w-full border border-gray-300 rounded-md py-2 flex items-center justify-center space-x-2 hover:bg-gray-100 transition">
-          <FaApple size={18} />
-          <span>Sign in with Apple</span>
-        </button>
+        <hr className="my-4" />
 
-        <button className="w-full border border-gray-300 rounded-md py-2 mt-2 flex items-center justify-center space-x-2 hover:bg-gray-100 transition">
-          <FcGoogle size={18} />
-          <span>Iniciar sesión con Google</span>
-        </button>
-
-        <p className="mt-4 text-xs text-gray-500 text-center">
-          By continuing you agree to our{" "}
-          <a href="#" className="text-blue-600 hover:underline">Terms and Conditions</a>,{" "}
-          our{" "}
-          <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>,{" "}
-          and the My Best Buy™ Program Terms.
-        </p>
-
-        <p className="mt-4 text-sm text-center">
-          Don’t have an account?{" "}
-          <a href="#" className="text-blue-600 hover:underline">Create an account</a>
-        </p>
+        <div>
+          <p className="font-semibold mb-1">¿Comprando para el trabajo?</p>
+          <a href="#" className="text-blue-600 text-sm hover:underline">
+            Crear una cuenta de empresa gratis
+          </a>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="mt-8 space-x-6 text-xs text-gray-600">
+        <a href="#" className="hover:underline">
+          Condiciones de uso
+        </a>
+        <a href="#" className="hover:underline">
+          Aviso de privacidad
+        </a>
+        <a href="#" className="hover:underline">
+          Ayuda
+        </a>
+        <p className="mt-2">&copy; 1996–2025, Amazon.com, Inc. o sus filiales</p>
+      </footer>
     </div>
   );
 };
 
-export default BestBuyLogin;
+export default AmazonLogin;
