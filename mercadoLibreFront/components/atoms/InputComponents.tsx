@@ -26,7 +26,7 @@ export default function InputComponents({ label, typeElement, idElement, listVal
           <select name="" id="">
             {
               listValues.map(item => (
-                <option value={item.value}>{ item.label }</option>
+                <option key={item.value} value={item.value}>{ item.label }</option>
               ))
             }
           </select>
