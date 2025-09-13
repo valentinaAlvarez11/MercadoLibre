@@ -44,7 +44,10 @@ dbProductos.run(`CREATE TABLE IF NOT EXISTS productos (
 
 // Middleware para CORS (permitir peticiones del frontend)
 app.use(cors({
-  origin: "http://localhost:3001", // Cambia el puerto si tu frontend corre en otro
+  origin: [
+    "http://localhost:3001",
+    "http://192.168.114.29:3001"
+  ],
   credentials: true
 }));
 // Middleware para procesar JSON y cookies
