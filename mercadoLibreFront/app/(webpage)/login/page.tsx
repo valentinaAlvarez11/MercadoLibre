@@ -1,13 +1,18 @@
+
+import Image from 'next/image';
 import LoginComponent from '@/components/molecules/LoginComponent';
 
 const AmazonLogin = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white text-sm">
       {/* Logo */}
-      <img
+      <Image
         src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
         alt="Amazon logo"
+        width={100}
+        height={32}
         className="h-8 mb-4"
+        priority
       />
 
       {/* Card */}

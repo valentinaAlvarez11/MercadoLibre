@@ -1,5 +1,6 @@
 // components/molecules/ProductDetails.tsx
 import React from 'react';
+import Image from 'next/image';
 // Podrías necesitar un componente de íconos para las estrellas,
 // pero por simplicidad usaremos un emoji o texto directo.
 
@@ -34,10 +35,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     <div className="flex flex-col lg:flex-row bg-white p-4 lg:p-6 rounded-lg shadow-md max-w-7xl mx-auto">
       {/* SECCIÓN 1: IMAGEN DEL PRODUCTO (Izquierda) */}
       <div className="lg:w-1/2 p-4 flex justify-center items-start border-r border-gray-200">
-        <img
+        <Image
           src={product.imageUrl || "/mercadolibre.png"}
           alt={product.name}
+          width={400}
+          height={500}
           className="max-w-full h-auto object-contain max-h-[500px] shadow-lg"
+          priority
         />
       </div>
 

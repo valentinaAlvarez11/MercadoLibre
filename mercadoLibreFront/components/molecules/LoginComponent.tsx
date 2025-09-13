@@ -9,12 +9,11 @@ import { loginScheme } from "@/schemas/login"
 
 import { loginService } from "@/libs/authService"
 
-import { standardInput } from "@/utils/Tokens"
+
 
 export default function LoginComponent() {
 
   const { 
-    register, 
     handleSubmit,
     formState: { errors }
   } = useForm<LoginDTO>({
@@ -26,7 +25,7 @@ export default function LoginComponent() {
     .then((info) => {
       localStorage.setItem('token', info.access_token)
     })
-    .catch(e => {
+    .catch(() => {
       console.error('Error en solicitud');
     })
   }

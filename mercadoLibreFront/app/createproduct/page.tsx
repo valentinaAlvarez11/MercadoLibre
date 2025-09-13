@@ -1,7 +1,7 @@
 "use client";
 "use client";
 import React, { useState } from "react";
-import InputComponents from "@/components/atoms/InputComponents";
+
 
 const initialState = {
   name: "",
@@ -59,7 +59,7 @@ export default function CreateProductPage() {
       } else {
         setMessage(data.error || "Error al crear producto");
       }
-    } catch (err) {
+    } catch {
       setMessage("Error de conexión con el backend");
     } finally {
       setLoading(false);

@@ -26,7 +26,7 @@ const ProductPage = () => {
           setProduct(null);
           setError(data.error || "Producto no encontrado");
         }
-      } catch (err) {
+      } catch {
         setError("Error de conexión con el backend");
       } finally {
         setLoading(false);
