@@ -6,7 +6,7 @@ const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 const app = express();
 const PORT = 3000;
-
+const SECRET_KEY = "tu_clave_secreta_aqui";
 
 // Conexión y tabla para usuarios
 const dbUsuarios = new sqlite3.Database('./usuarios.db', (err) => {

@@ -1,9 +1,45 @@
-import React from 'react';
+"use client";
+
+import React, { useState , FormEvent } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Image from 'next/image';
 import mercadolibreLogo from '../assets/mercadolibre1.png';
 
 const MercadolibreLogin = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, contraseña: password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccess(true);
+        console.log('Login exitoso:', data);
+      } else {
+        setError(data.error);
+      }
+    } catch (err) {
+      setError('No se pudo conectar con el servidor. Inténtalo de nuevo.');
+      console.error('Error de conexión:', err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white text-sm font-sans">
       <header className="fixed top-0 left-0 w-full bg-yellow-300 shadow-md p-3 z-10">
@@ -19,20 +55,18 @@ const MercadolibreLogin = () => {
 
       <div className="flex justify-center items-center h-screen bg-white">
         {/* Contenedor de la izquierda para el título */}
-        <div className="w-[500px] p-8 pt-15 mr-4 mb-60">
+        <div className="w-[500px] p-8 pt-15 mr-4 mb-40">
           <h1 className="text-3xl font-semibold text-left">
             Ingresa tu e-mail o teléfono para iniciar sesión
           </h1>
-          <div className="mt-50">
+          <div className="mt-70">
             <a href="#" className="inline-flex items-center space-x-2 rounded-lg shadow-md p-4 bg-white hover:bg-gray-100">
               <div className="flex items-center space-x-2">
-                {/* Ícono de seguridad con signo de exclamación */}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-gray-500">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 <span>Tengo un problema de seguridad</span>
               </div>
-              {/* Ícono de la flecha derecha */}
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-gray-400">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
               </svg>
@@ -45,7 +79,7 @@ const MercadolibreLogin = () => {
 
         {/* Contenedor de la derecha para el formulario */}
         <div className="w-[470px] bg-white rounded-lg border border-gray-200 mb-35">
-          <div className="w-full p-8 pt-10">
+          <form onSubmit={handleSubmit} className="w-full p-8 pt-10">
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 text-sm mb-2">
                 E-mail o teléfono
@@ -53,6 +87,8 @@ const MercadolibreLogin = () => {
               <input
                 type="text"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -64,11 +100,16 @@ const MercadolibreLogin = () => {
               <input
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <button className="w-full bg-blue-500 text-white rounded-md py-3 text-lg font-semibold mb-3 hover:bg-blue-600 transition-colors cursor-pointer">
+            {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+            {success && <p className="text-green-500 text-sm mb-3">¡Login exitoso! Redirigiendo...</p>}
+
+            <button type="submit" className="w-full bg-blue-500 text-white rounded-md py-3 text-lg font-semibold mb-3 hover:bg-blue-600 transition-colors cursor-pointer">
               Continuar
             </button>
 
@@ -89,8 +130,7 @@ const MercadolibreLogin = () => {
               <FcGoogle size={20} />
               <span>Iniciar sesión con Google</span>
             </button>
-
-          </div>
+          </form>
         </div>
       </div>
 
