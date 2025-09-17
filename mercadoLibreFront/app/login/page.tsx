@@ -44,7 +44,7 @@ const MercadolibreLogin = () => {
         </div>
 
         {/* Contenedor de la derecha para el formulario */}
-        <div className="w-[470px] bg-white rounded-lg border border-gray-200 mb-55">
+        <div className="w-[470px] bg-white rounded-lg border border-gray-200 mb-35">
           <div className="w-full p-8 pt-10">
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 text-sm mb-2">
@@ -53,6 +53,17 @@ const MercadolibreLogin = () => {
               <input
                 type="text"
                 id="email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-gray-700 text-sm mb-2">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                id="password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -79,7 +90,6 @@ const MercadolibreLogin = () => {
               <span>Iniciar sesión con Google</span>
             </button>
 
-            
           </div>
         </div>
       </div>
