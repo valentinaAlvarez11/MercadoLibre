@@ -3,6 +3,14 @@
 import { useState, useEffect } from 'react';
 import CardProducts, { ProductCardInfo } from '../../components/molecules/CardProducts';
 import ImageCarousel from "@/components/organisms/MercadoLibreCarrouselImages";
+import type { Metadata } from 'next'; 
+
+// Definimos y exportamos el objeto 'metadata'
+export const metadata: Metadata = {
+  title: 'Mercado Libre Colombia - Envíos Gratis en el día',
+  description: 'Descubre las mejores ofertas en productos electrónicos, ropa, hogar y más. ¡Encuentra lo que buscas en Mercado Libre!',
+  keywords: ['Mercado Libre', 'ecommerce', 'compras online', 'ofertas', 'envíos gratis'],
+};
 
 const HomePage = () => {
   const [products, setProducts] = useState<ProductCardInfo[]>([]);
@@ -14,8 +22,6 @@ const HomePage = () => {
       setLoading(true);
       setError(null);
       try {
-        // Simulación de datos para la lista de productos
-        // Reemplaza esto con tu llamada real a la API
         const data = [
           {
             id: '1',
@@ -61,10 +67,8 @@ const HomePage = () => {
     <div className="min-h-screen bg-gray-100">
       <main className="container mx-auto py-8 px-4">
         <ImageCarousel />
-
         {loading && <div className="text-center text-lg mt-8">Cargando productos...</div>}
         {error && <div className="text-center text-red-600 font-semibold mt-8">{error}</div>}
-        
         <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">Productos</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {!loading && products.map((product) => (
