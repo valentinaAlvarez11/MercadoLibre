@@ -6,11 +6,6 @@ import { FcGoogle } from 'react-icons/fc';
 import Image from 'next/image';
 import mercadolibreLogo from '../assets/mercadolibre1.png';
 
-export const metadata: Metadata = {
-  title: 'Iniciar Sesión en Mercado Libre',
-  description: 'Ingresa a tu cuenta de Mercado Libre para acceder a tus compras, ventas y notificaciones.',
-};
-
 const MercadolibreLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
